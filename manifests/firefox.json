@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Last.fm for Google Play Music",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Ash Kyd",
   "description": "last.fm support for Google Play Music",
   "content_scripts": [
