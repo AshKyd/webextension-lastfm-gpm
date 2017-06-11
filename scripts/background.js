@@ -1,5 +1,6 @@
 /* global browser */
 const API = require('last.fm.api');
+const console = require('./console');
 
 let globalSession;
 const apiKey = '1015bb31ee88bdd0ea6a5dabbd6a498f';
@@ -7,18 +8,9 @@ const apiSecret = 'a7aefbbb0d67d47b51f17762c88763d1';
 const lastfm = new API({
   apiKey,
   apiSecret,
-  debug: true,
 });
 
 const actions = {
-  // {
-  //   artist: 'Radiohead',
-  //   track: 'Creep',
-  //   timestamp: Math.round(Date.now()/1000) // The time the track starting playing, UNIX timestamp
-  //   //album: 'bleach', // optional,
-  //   //trackNumber: 7, // optional,
-  //   //mbid: '' // optional
-  // }
   scrobble(opts) {
     if (!globalSession) return console.warn('No session found. Log in to scrobble.');
     const { track, artist, album } = opts;
@@ -47,7 +39,6 @@ const actions = {
       apiSecret,
       username,
       password,
-      debug: true,
     });
 
     // Get Mobile Session by supplying username and password into API constructor
@@ -59,9 +50,11 @@ const actions = {
           sessionKey: session.key,
         };
         browser.storage.local.set(globalSession).catch(err => console.error('Save errored', err));
+        actions.popupInit();
       })
       .catch((err) => {
         console.error('ERRORED!', JSON.stringify(err));
+        actions.popupInit();
       });
   },
   getCurrentStatus() {
@@ -70,18 +63,21 @@ const actions = {
       browser.runtime.sendMessage({ action: 'popupInitNotPlaying' });
     }
 
-    console.log('querying tabs')
+    console.log('querying tabs');
     browser.tabs.query({
-      url: 'https://play.google.com/music/listen*'
-      // currentWindow: true,
-      // active: true
+      url: 'https://play.google.com/music/listen*',
     })
     .then((tabs) => {
       console.log('got response', tabs);
-      if (!tabs[0]) return browser.runtime.sendMessage({ action: 'popupInitNotPlaying' });
+      if (!tabs[0]) {
+        console.log('no tabs found');
+        return browser.runtime.sendMessage({ action: 'popupInitNotPlaying' });
+      }
       console.log('sending message');
       return browser.tabs.sendMessage(tabs[0].id, { action: 'getCurrent' })
-        .then(opts => browser.runtime.sendMessage({ action: 'popupInitPlaying', opts }))
+        .then((opts) => {
+          browser.runtime.sendMessage({ action: 'popupInitPlaying', opts });
+        })
         .catch(onError);
     }).catch(onError);
   },

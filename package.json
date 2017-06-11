@@ -5,12 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "browserify background.js > /tmp/bld && mv /tmp/bld background.min.js",
-    "watch": "watch 'npm run build' . --wait=3"
+    "build": "npm run clean;npm run copy && npm run browserify && npm run zip",
+    "clean": "rm build -rf;rm build.zip",
+    "copy": "cp content build -r && mkdir build/scripts",
+    "browserify": "for f in scripts/*; do browserify $f -o build/$f& done;wait",
+    "zip": "cd build && zip ../build.zip *",
+    "watch": "watch 'npm run build' src --wait=5"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "he": "^1.1.1",
     "last.fm.api": "git+ssh://git@github.com/AshKyd/last.fm.api.git"
   },
   "devDependencies": {

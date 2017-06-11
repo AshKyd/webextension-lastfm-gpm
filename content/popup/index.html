@@ -3,21 +3,20 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Title tag</title>
-		<script type="text/javascript" src="popup.js" defer></script>
-		<style type="text/css">
-			body{overflow:hidden;}
-			.panel.hidden{z-index:0;opacity:0;}
-			.panel.visible{z-index:1;opacity:1;}
-			.panel{transition: opacity 0.25s;}
-		</style>
+		<script type="text/javascript" src="../scripts/popup.js" defer></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
 		<div class="panel hidden" id="panel-login">
 			<div class="panel-section panel-section-header">
-				<img class="icon-section-header" id="icon"/>
+				<img class="icon-section-header" id="icon" src="../icons/vector.svg"/>
 				<div class="text-section-header" id="url">Log in to last.fm</div>
-				<div><label for="username">Username</label><input id="username" type="text"></div>
-				<div><label for="password">Password</label><input id="password" type="password"></div>
+			</div>
+			<div class="panel-content">
+				<form action="#">
+					<div><label for="input-username">Username</label><input id="input-username" type="text"></div>
+					<div><label for="input-password">Password</label><input id="input-password" type="password"></div>
+				</form>
 			</div>
 
 			<div class="panel-section panel-section-footer">
@@ -28,10 +27,10 @@
 		</div>
 		<div class="panel hidden" id="panel-notPlaying">
 			<div class="panel-section panel-section-header">
-				<img class="icon-section-header" id="icon"/>
+				<img class="icon-section-header" id="icon" src="../icons/vector.svg"/>
 				<div class="text-section-header" id="url">Nothing playing</div>
 			</div>
-			<div>
+			<div class="panel-content">
 				<p>Open Google Play Music to start scrobbling</p>
 			</div>
 			<div class="panel-section panel-section-footer">
@@ -40,15 +39,14 @@
 		</div>
 		<div class="panel hidden" id="panel-playing">
 			<div class="panel-section panel-section-header">
-				<img class="icon-section-header" id="icon"/>
+				<img class="icon-section-header" id="icon" src="../icons/vector.svg"/>
 				<div class="text-section-header" id="url">Now scrobbling</div>
 			</div>
-			<div>
-				<p>Current track: 123</p>
-			</div>
-			<div class="panel-section panel-section-footer">
-				<div id="button-open" class="panel-section-footer-button">Open Google Play Music</div>
+			<div class="currentTrack panel-content">
+
 			</div>
 		</div>
+		<div class="panel hidden" id="panel-loading">
+			<div class="loader">Loading...</div>
 	</body>
 </html>
