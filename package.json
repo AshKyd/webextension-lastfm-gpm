@@ -1,5 +1,5 @@
 {
-  "name": "webextension-lastfm",
+  "name": "webextension-lastfm-gpm",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "copy": "cp content build -r && mkdir build/scripts",
     "browserify": "for f in scripts/*; do browserify $f -o build/$f& done;wait",
     "zip": "cd build && zip ../build.zip *",
-    "watch": "watch 'npm run build' src --wait=5"
+    "watch": "watch 'npm run build' scripts content --wait=5"
   },
   "author": "",
   "license": "ISC",
