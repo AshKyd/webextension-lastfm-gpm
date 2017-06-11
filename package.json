@@ -1,0 +1,25 @@
+{
+  "name": "webextension-lastfm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify background.js > /tmp/bld && mv /tmp/bld background.min.js",
+    "watch": "watch 'npm run build' . --wait=3"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "last.fm.api": "git+ssh://git@github.com/AshKyd/last.fm.api.git"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "watch": "^1.0.2"
+  }
+}
