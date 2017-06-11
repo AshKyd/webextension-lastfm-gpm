@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run clean;npm run copy && npm run browserify && npm run zip",
-    "clean": "rm build -rf;rm build.zip",
-    "copy": "cp content build -r && mkdir build/scripts",
+    "build": "npm run clean;npm run copy && npm run browserify; wait; npm run chrome && npm run firefox; rm build -rf",
+    "clean": "rm build chrome* firefox* -rf;",
+    "copy": "cp content build -r && mkdir build/scripts && cp node_modules/webextension-polyfill/dist/browser-polyfill.min.js build/scripts/",
     "browserify": "for f in scripts/*; do browserify $f -o build/$f& done;wait",
-    "zip": "cd build && zip ../build.zip *",
-    "watch": "watch 'npm run build' scripts content --wait=5"
+    "chrome": "cp build chrome -r && cp manifests/chrome.json chrome/manifest.json && cd chrome && zip ../chrome.zip * -r",
+    "firefox": "cp build firefox -r && cp manifests/firefox.json firefox/manifest.json && cd firefox && zip ../firefox.zip * -r",
+    "watch": "watch 'npm run build && echo -ne \"\\007\"' scripts content manifests"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-react": "^7.0.1",
+    "json": "^9.0.6",
     "watch": "^1.0.2"
   }
 }

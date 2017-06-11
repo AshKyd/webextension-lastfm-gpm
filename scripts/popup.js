@@ -71,3 +71,11 @@ document.body.addEventListener('click', (e) => {
     });
   }
 });
+
+if (typeof chrome !== 'undefined') {
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = 'chrome.css';
+  document.head.appendChild(link);
+}

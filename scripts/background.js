@@ -12,7 +12,7 @@ const lastfm = new API({
 
 const actions = {
   scrobble(opts) {
-    if (!globalSession) return console.warn('No session found. Log in to scrobble.');
+    if (!globalSession || !globalSession.sessionKey) return console.warn('No session found. Log in to scrobble.');
     const { track, artist, album } = opts;
     const payload = {
       tracks: [
@@ -82,7 +82,7 @@ const actions = {
     }).catch(onError);
   },
   popupInit() {
-    if (!globalSession) return browser.runtime.sendMessage({ action: 'popupInitLogin' });
+    if (!globalSession || !globalSession.sessionKey) return browser.runtime.sendMessage({ action: 'popupInitLogin' });
     return actions.getCurrentStatus();
   },
 };

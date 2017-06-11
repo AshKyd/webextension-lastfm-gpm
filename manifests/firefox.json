@@ -14,11 +14,12 @@
     "storage",
     "tabs"
   ],
-
   "background": {
     "scripts": ["scripts/background.js"]
   },
-
+  "icons": {
+    "100": "icons/raster.png"
+  },
   "browser_action": {
     "browser_style": true,
     "default_popup": "popup/index.html",

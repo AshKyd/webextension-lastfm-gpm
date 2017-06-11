@@ -46,8 +46,8 @@ body{overflow:hidden;width:380px;height:260px;}
   height:100%;
   width:195px;
   background-repeat: no-repeat !important;
-  background-size:contain !important;
-  background-position:left center !important;
+  background-size:cover !important;
+  background-position:center !important;
   box-shadow: 0 0 0.5em rgba(0,0,0,.1);
 }
 
