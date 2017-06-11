@@ -1,4 +1,4 @@
-const log = false;
+const log = true;
 
 if (log) {
   module.exports = console;

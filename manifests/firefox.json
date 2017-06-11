@@ -1,13 +1,17 @@
 {
   "manifest_version": 2,
   "name": "Last.fm for Google Play Music",
-  "version": "1.0",
+  "version": "1.0.0",
   "author": "Ash Kyd",
   "description": "last.fm support for Google Play Music",
   "content_scripts": [
     {
-      "matches": ["https://play.google.com/music/*"],
-      "js": ["scripts/content.js"]
+      "matches": [
+        "https://play.google.com/music/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
     }
   ],
   "permissions": [
@@ -15,17 +19,17 @@
     "tabs"
   ],
   "background": {
-    "scripts": ["scripts/background.js"]
+    "scripts": [
+      "scripts/background.js"
+    ]
   },
   "icons": {
     "100": "icons/raster.png"
   },
   "browser_action": {
-    "browser_style": true,
     "default_popup": "popup/index.html",
     "default_icon": {
       "16": "icons/vector.svg"
     }
   }
-
 }

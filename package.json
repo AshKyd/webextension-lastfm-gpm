@@ -11,13 +11,15 @@
     "browserify": "for f in scripts/*; do browserify $f -o build/$f& done;wait",
     "chrome": "cp build chrome -r && cp manifests/chrome.json chrome/manifest.json && cd chrome && zip ../chrome.zip * -r",
     "firefox": "cp build firefox -r && cp manifests/firefox.json firefox/manifest.json && cd firefox && zip ../firefox.zip * -r",
-    "watch": "watch 'npm run build && echo -ne \"\\007\"' scripts content manifests"
+    "watch": "watch 'npm run build && echo -ne \"\\007\"' scripts content manifests",
+    "version": "./version.sh"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "he": "^1.1.1",
-    "last.fm.api": "git+ssh://git@github.com/AshKyd/last.fm.api.git"
+    "last.fm.api": "git+ssh://git@github.com/AshKyd/last.fm.api.git",
+    "webextension-polyfill": "^0.1.1"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
